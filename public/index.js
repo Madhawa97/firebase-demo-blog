@@ -7,6 +7,7 @@ import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     onAuthStateChanged,
+    signOut,
 } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-auth.js";
 
 const _app = initializeApp(cred);
@@ -60,6 +61,18 @@ if (signup_form) {
     };
 }
 
+const signout_button = document.getElementById("signout");
+signout_button.onclick = () => {
+    signOut(auth)
+        .then(() => {
+            // Sign-out successful.
+            console.log("signout");
+        })
+        .catch((error) => {
+            // An error happened.
+            console.log("error:signout");
+        });
+};
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
