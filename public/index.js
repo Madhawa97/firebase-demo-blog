@@ -1,4 +1,4 @@
-let app = firebase.app();
+export let app = firebase.app();
 const cred = app._delegate._options;
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-app.js";
@@ -10,7 +10,7 @@ import {
     signOut,
 } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-auth.js";
 
-const _app = initializeApp(cred);
+export const _app = initializeApp(cred);
 // console.log(_app);
 
 const auth = getAuth();
