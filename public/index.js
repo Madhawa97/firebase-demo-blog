@@ -67,6 +67,7 @@ signout_button.onclick = () => {
         .then(() => {
             // Sign-out successful.
             console.log("signout");
+            location.reload();
         })
         .catch((error) => {
             // An error happened.
@@ -76,12 +77,23 @@ signout_button.onclick = () => {
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
-        const uid = user.uid;
-        console.log(uid);
+        document.querySelectorAll("a[title=auth_done]").forEach((node) => {
+            node.style.display = "none";
+        });
+        document.querySelectorAll("a[title=auth]").forEach((node) => {
+            node.style.display = "block";
+        });
+
+        document.getElementById("userid").innerHTML = user.email;
+        console.log(user.email);
+        localStorage.setItem("uid", user.uid);
     } else {
         // User is signed out
-        console.log('====================================');
-        console.log("User not found");
-        console.log('====================================');
+        document.querySelectorAll('a[title=auth]').forEach(node => {
+            node.style.display = 'none';
+        });
+        document.querySelectorAll("a[title=auth_done]").forEach((node) => {
+            node.style.display = "block";
+        });
     }
 });
