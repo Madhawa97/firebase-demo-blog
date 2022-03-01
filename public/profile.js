@@ -27,6 +27,8 @@ if (localStorage.getItem('user')){
     document.querySelector("input[name= phone]").placeholder = user["phone"];
     document.querySelector("input[name= website]").placeholder = user["website"];
     document.getElementById('show-img').src = user['url'];
+    document.getElementById("profile-info-name").innerHTML = user["username"];
+    document.getElementById("profile-info-address").innerHTML = user["address"];
 }
 
 

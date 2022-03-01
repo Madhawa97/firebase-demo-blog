@@ -23,6 +23,36 @@
     
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
 
+    <style>
+        .profile-avatar{
+            height: 18vw;
+            width: 18vw;
+            margin: 2vw;
+            object-fit: contain;
+            border-radius: 50%;
+            background-color: black;
+        }
+
+        #profile-info {
+            position: relative;
+            transform: translate(30%, 30%);
+        }
+
+        #profile-preview {
+            width: 50%;
+            position: relative;
+            transform: translateX(50%);
+            margin-bottom: 3vw !important;
+            display: flex;
+        }
+
+        #upd_profile {
+            width: 50% !important;
+            position: relative !important;
+            transform: translateX(50%);
+        }
+    </style>
+
 </head>
 <body>
     <nav class="w3-bar w3-light-grey w3-border">
@@ -37,8 +67,12 @@
         <a href="./profile.html" class="w3-bar-item w3-button" id="userid" title="auth"></a>
     </nav>
 
-    <div class="w3-container">
-        <img class="w3-image" src="" alt="" id="show-img">
+    <div class="w3-container w3-card-4 w3-light-grey w3-text-blue w3-margin" id="profile-preview">
+        <img class="profile-avatar" src="" alt="" id="show-img">
+        <div id="profile-info">
+            <h1 id="profile-info-name"></h1>
+            <p id="profile-info-address"></p>
+        </div>
     </div>
 
     <form action="/action_page.php" class="w3-container w3-card-4 w3-light-grey w3-text-blue w3-margin" enctype="multipart/form-data" id="upd_profile">
