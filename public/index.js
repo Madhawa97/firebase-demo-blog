@@ -86,7 +86,8 @@ onAuthStateChanged(auth, (user) => {
         });
 
         document.getElementById("userid").innerHTML = user.email;
-        console.log(user.email);
+        document.getElementById("profile-info-name").innerHTML = user.email;
+        // console.log(user);
         localStorage.setItem("uid", user.uid);
     } else {
         // User is signed out
