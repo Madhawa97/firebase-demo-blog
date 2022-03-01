@@ -66,6 +66,7 @@ signout_button.onclick = () => {
     signOut(auth)
         .then(() => {
             // Sign-out successful.
+            localStorage.removeItem('user')
             console.log("signout");
             location.reload();
         })
