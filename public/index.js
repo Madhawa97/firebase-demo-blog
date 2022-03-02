@@ -68,7 +68,7 @@ signout_button.onclick = () => {
             // Sign-out successful.
             localStorage.removeItem('user')
             console.log("signout");
-            location.reload();
+            location.href = "./";
         })
         .catch((error) => {
             // An error happened.
