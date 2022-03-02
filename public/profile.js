@@ -4,6 +4,7 @@ import {
     getFirestore,
     doc,
     setDoc,
+    getDoc,
 } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore.js";
 import {
     getStorage,
@@ -18,6 +19,7 @@ const db = getFirestore();
 
 const upd_profile = document.getElementById("upd_profile");
 
+const id = localStorage.getItem("uid");
 
 if (localStorage.getItem('user')){
     const user = JSON.parse(localStorage.getItem('user'));
@@ -50,16 +52,12 @@ if (upd_profile) {
                 delete data['pro_file'];
                 data["url"] = url;
 
-                const id = localStorage.getItem('uid');
-                console.log(data);
+                // console.log(data);
                 setDoc(doc(db, "user", id), data)
                     .then(() => {
                         const user = JSON.stringify(data);
                         localStorage.setItem("user", user);
                         location.reload();
-                        console.log("====================================");
-                        console.log("Successfully upload");
-                        console.log("====================================");
                     })
                     .catch(() => {
                         console.log("Upload failed");
@@ -70,3 +68,32 @@ if (upd_profile) {
         // > send it to firestore
     };
 }
+
+// window.addEventListener('DOMContentLoaded', () => {
+//     if(document.getElementById('upd_profile') && !localStorage.getItem('user')){
+//         getDoc(doc(db, 'user', id))
+//             .then((doc)=> {
+//                 console.log(doc.id,doc.data);
+//             })
+//             .catch(()=>{console.log("error getting documnet")})
+//         }
+// })
+
+window.addEventListener("DOMContentLoaded", () => {
+    if (
+        document.getElementById("upd_profile") &&
+        !localStorage.getItem("user")
+    ) {
+        getDoc(doc(db, "user", id)).then((doc) => {
+            const { username, address, phone, website, url } = doc.data();
+            document.querySelector("input[name=username]").placeholder =
+                username;
+            document.querySelector("input[name=address]").placeholder = address;
+            document.querySelector("input[name=phone]").placeholder = phone;
+            document.querySelector("input[name=website]").placeholder = website;
+            document.getElementById("show-img").src = url;
+            document.getElementById("profile-info-name").innerHTML = username;
+            document.getElementById("profile-info-address").innerHTML = address;
+        });
+    }
+});
